@@ -13,5 +13,13 @@
     "metric_change": "passed",
     "empty_sector_selection": "passed"
   },
-  "publication": "not published; upstream URL referenced"
+  "publication": "Published in kkc-lgtm/real-estate-data-pipeline; upstream authorship retained",
+  "business_requirement_acceptance_tests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "combined_suite": {
+    "passed": 12,
+    "failed": 0
+  }
 }

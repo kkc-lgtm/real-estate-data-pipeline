@@ -1,8 +1,28 @@
 # Real estate pipeline execution and validation
 
-This repository contains a small Windows execution adapter and validation notes for [Bahna-Darius's real-estate-data-pipeline](https://github.com/Bahna-Darius/real-estate-data-pipeline). It is not a newly authored real estate pipeline. The original scraper, Silver transformation, Gold aggregations, dashboard and eight test assertions belong to the upstream author.
+This fork adds configurable business rules, record-level quarantine diagnostics and a Windows execution adapter to [Bahna-Darius's real-estate-data-pipeline](https://github.com/Bahna-Darius/real-estate-data-pipeline). It is not a newly authored real estate pipeline. The original scraper, Silver transformation, Gold aggregations, dashboard and eight test assertions belong to the upstream author.
 
-Pinned source commit: `a7ab704445b3da4218b4fd9371c1359430cda433`.
+Original source baseline commit: `a7ab704445b3da4218b4fd9371c1359430cda433`.
+
+## Added business requirements
+
+The local execution exposed a comparability issue, so this fork now adds:
+
+- A configurable individual-offer URL path, defaulting to `/ro/oferta/`.
+- Rejection reasons for missing/duplicate IDs, invalid prices, invalid areas and inconsistent price/area ratios. All duplicate IDs are quarantined instead of selecting an arbitrary winner.
+- `quality_summary.csv` with counts by rejection reason; one row can have multiple reasons.
+- `--min-listings` to configure neighborhood coverage. The original default of two is retained, but analysts can require a larger sample or inspect singleton groups.
+- Four acceptance tests for these requirements, in addition to the eight reused Silver assertions. All 12 passed locally on 14 October 2026.
+
+Example after environment setup, from the reproduction directory:
+
+```powershell
+.\.venv\Scripts\python.exe run_reproduction.py --upstream upstream --min-listings 5 --results results_min5
+$env:UPSTREAM_DIR = (Resolve-Path upstream).Path
+.\.venv\Scripts\python.exe -m pytest test_upstream_windows.py test_portfolio_requirements.py -v
+```
+
+Missing room/neighborhood values remain visible in the quality checks rather than being automatically rejected from the global summary. The original aggregations handle their own coverage. The quality rules are intended for small local batches and require review before production use.
 
 ## Verified local run on 14 October 2026
 
@@ -19,7 +39,7 @@ Machine-readable evidence is in `results/run_report.json`. Aggregate CSVs and qu
 
 ## What changed for Windows
 
-The adapter imports and executes the original `transform_bronze_to_silver`, `build_by_neighborhood`, `build_rooms_distribution`, and `build_market_summary` functions. It does not replace their transformations with pandas equivalents.
+The adapter uses the upstream Silver transformation and Gold functions. In this fork, `build_by_neighborhood` now accepts a configurable `min_listings` parameter, while `portfolio_quality.py` adds business-specific record classification. pandas/pyarrow handles only local result export.
 
 1. Read the exact raw JSON file. Reading its containing directory would also ingest a CSV file, which is an input-format risk.
 2. Write the small collected results to CSV/Parquet with pandas/pyarrow, avoiding Windows Hadoop native writer requirements. This small-data workaround is not a scalable distributed export strategy.
@@ -39,8 +59,7 @@ Requirements: Python 3.12, Git, a JDK 17 installation. Use a virtual environment
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-git clone https://github.com/Bahna-Darius/real-estate-data-pipeline.git upstream
-git -C upstream checkout a7ab704445b3da4218b4fd9371c1359430cda433
+git clone https://github.com/kkc-lgtm/real-estate-data-pipeline.git upstream
 # Set JAVA_HOME to your actual JDK 17 folder first.
 $env:PATH = "$env:JAVA_HOME\bin;$env:PATH"
 $env:PYSPARK_PYTHON = (Resolve-Path '.\.venv\Scripts\python.exe').Path
@@ -51,7 +70,7 @@ $env:UPSTREAM_DIR = (Resolve-Path upstream).Path
 .\.venv\Scripts\python.exe -m streamlit run upstream/dashboards/app.py --server.address 127.0.0.1 --server.headless true --browser.gatherUsageStats false
 ```
 
-Run these commands from the reproduction directory. The separate upstream checkout is pinned so later commits to this fork do not change the code being validated.
+Run these commands from the reproduction directory. The separate checkout contains this fork's added quality module. Its ancestry must include the original baseline; the run report records the checked-out commit and source hashes.
 
 Live listings change. Another scrape can produce different counts, prices and groups. The recorded results refer only to the input SHA-256 in `run_report.json`; they must not be promised for future scrapes.
 

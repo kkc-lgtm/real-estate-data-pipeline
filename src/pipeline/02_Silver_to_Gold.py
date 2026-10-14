@@ -16,8 +16,10 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def build_by_neighborhood(df_silver: DataFrame) -> DataFrame:
-    """Aggregates avg price and €/m² per sector+neighborhood. Filters zones with < 2 listings."""
+def build_by_neighborhood(df_silver: DataFrame, min_listings: int = 2) -> DataFrame:
+    """Aggregate prices by neighborhood with a configurable minimum sample size."""
+    if not isinstance(min_listings, int) or isinstance(min_listings, bool) or min_listings < 1:
+        raise ValueError('min_listings must be a positive integer')
     gold_by_neighborhood = df_silver.filter(
         F.col("Neighborhood").isNotNull()
     ).groupby(
@@ -30,7 +32,7 @@ def build_by_neighborhood(df_silver: DataFrame) -> DataFrame:
         F.round(F.min("Price_EUR"), 0).alias("Pret_Min_EUR"),
         F.round(F.max("Price_EUR"), 0).alias("Pret_Max_EUR")
     ).filter(
-        F.col("Numar_Anunturi") >= 2
+        F.col("Numar_Anunturi") >= min_listings
     ).orderBy(
         F.col("Pret_Mediu_MP_EUR").desc()
     )

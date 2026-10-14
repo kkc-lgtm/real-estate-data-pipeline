@@ -1,10 +1,10 @@
-## Verified Windows execution and data-quality checks
+## Property analytics with configurable data-quality rules
 
-This fork adds local execution support and a verified snapshot to the original project by [Bahna-Darius](https://github.com/Bahna-Darius/real-estate-data-pipeline).
+This fork adds configurable neighborhood sample sizes, record-level quarantine reasons, SQL reconciliation and a verified local snapshot to the original project by [Bahna-Darius](https://github.com/Bahna-Darius/real-estate-data-pipeline).
 
 - 70 advertisements processed; three development advertisements quarantined; 67 individual offers analyzed.
 - Original PySpark transformations and aggregation functions used, with independent SQL reconciliation.
-- Eight original Silver assertions passed with an equivalent Windows SQL fixture adapter; original Streamlit dashboard and filters validated.
+- Twelve tests passed locally: eight original Silver assertions with a Windows SQL fixture adapter and four acceptance checks for the added requirements. The original Streamlit dashboard and filters were validated.
 - See [run instructions, provenance and limitations](reproduction/README.md), [recorded results](reproduction/results/run_report.json), and [validation summary](reproduction/results/validation_summary.json).
 - Microsoft Fabric was not deployed in this local run.
 

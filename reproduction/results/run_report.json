@@ -1,6 +1,12 @@
 {
   "upstream_url": "https://github.com/Bahna-Darius/real-estate-data-pipeline",
   "upstream_commit": "a7ab704445b3da4218b4fd9371c1359430cda433",
+  "code_sha256": {
+    "src/pipeline/01_Bronze_to_Silver.py": "3713fb1c0fecc80cf2d519d4279502b728aad5de467e100b4397bb0827551bff",
+    "src/pipeline/02_Silver_to_Gold.py": "19a22d91b7f5a83441fad51ae3c67a5498d89468b4fadde9d097877f88c0f3d5",
+    "src/pipeline/portfolio_quality.py": "5c336debae6ca7e6c8afafb9542eef6053571679f7166085b42e4c5955f01096"
+  },
+  "source_files_modified_before_commit": true,
   "input_sha256": "46ec7f6adcfbcb4a74127803928fe4d5d4147be10b289bad07bc2cc0ad0954d0",
   "data_origin": "Live upstream scraper output from storia.ro; asking prices, not completed transactions",
   "runtime": {
@@ -21,6 +27,10 @@
   },
   "curated_rows": 67,
   "quarantined_rows": 3,
+  "requirements": {
+    "min_listings": 2,
+    "individual_path": "/ro/oferta/"
+  },
   "quarantine_rule": "Only /ro/oferta/ individual listings; exclude /ro/ansamblu/ development advertisements",
   "upstream_unfiltered_market_summary": {
     "Total_Anunturi": 70,

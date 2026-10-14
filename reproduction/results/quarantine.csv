@@ -1,4 +1,4 @@
-listing_id,rooms,scraped_at,source,title,url,Price_EUR,Area_sqm,Price_per_sqm,City_Sector,Neighborhood
-f0f5f85ea0f0639da32498a5c057bb49,4,2026-10-14T16:13:21.413772+00:00,storia.ro,SoGlad Residence,https://www.storia.ro/ro/ansamblu/soglad-residence-IDEgW6,1800,43.7,41.19,Sectorul 4,Progresul
-5ea683c1ea8f5a4c89f50696727d6232,3,2026-10-14T16:13:21.414775+00:00,storia.ro,Vienna Parkside Residence – Metalurgiei Park Faza 2,https://www.storia.ro/ro/ansamblu/vienna-parkside-residence-metalurgiei-park-faza-2-IDBHSz,1650,40.6,40.64,Sectorul 4,Aparatorii Patriei
-29762ebe7faa21bd2fd24adfe6a0bc2c,4,2026-10-14T16:13:21.414775+00:00,storia.ro,HILS Republica,https://www.storia.ro/ro/ansamblu/hils-republica-IDGWdI,332750,78.5,4238.85,Sectorul 3,Industriilor
+listing_id,rooms,scraped_at,source,title,url,Price_EUR,Area_sqm,Price_per_sqm,City_Sector,Neighborhood,rejection_reason
+29762ebe7faa21bd2fd24adfe6a0bc2c,4,2026-10-14T16:13:21.414775+00:00,storia.ro,HILS Republica,https://www.storia.ro/ro/ansamblu/hils-republica-IDGWdI,332750,78.5,4238.85,Sectorul 3,Industriilor,outside_individual_offer_scope
+5ea683c1ea8f5a4c89f50696727d6232,3,2026-10-14T16:13:21.414775+00:00,storia.ro,Vienna Parkside Residence – Metalurgiei Park Faza 2,https://www.storia.ro/ro/ansamblu/vienna-parkside-residence-metalurgiei-park-faza-2-IDBHSz,1650,40.6,40.64,Sectorul 4,Aparatorii Patriei,outside_individual_offer_scope
+f0f5f85ea0f0639da32498a5c057bb49,4,2026-10-14T16:13:21.413772+00:00,storia.ro,SoGlad Residence,https://www.storia.ro/ro/ansamblu/soglad-residence-IDEgW6,1800,43.7,41.19,Sectorul 4,Progresul,outside_individual_offer_scope
