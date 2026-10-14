@@ -1,0 +1,17 @@
+{
+  "execution_date": "2026-10-14",
+  "original_test_suite": {
+    "passed": 1,
+    "failed_due_to_python_worker_crash": 7
+  },
+  "equivalent_sql_fixture_original_assertions": {
+    "passed": 8,
+    "failed": 0
+  },
+  "dashboard_checks": {
+    "initial_render": "passed",
+    "metric_change": "passed",
+    "empty_sector_selection": "passed"
+  },
+  "publication": "not published; upstream URL referenced"
+}

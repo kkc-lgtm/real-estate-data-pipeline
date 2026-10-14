@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+upstream/
+*.log
+.env
+results/silver/
+results/*/*.parquet

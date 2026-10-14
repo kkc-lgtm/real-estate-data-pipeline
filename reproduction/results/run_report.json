@@ -1,0 +1,54 @@
+{
+  "upstream_url": "https://github.com/Bahna-Darius/real-estate-data-pipeline",
+  "upstream_commit": "a7ab704445b3da4218b4fd9371c1359430cda433",
+  "input_sha256": "46ec7f6adcfbcb4a74127803928fe4d5d4147be10b289bad07bc2cc0ad0954d0",
+  "data_origin": "Live upstream scraper output from storia.ro; asking prices, not completed transactions",
+  "runtime": {
+    "python": "3.12.14",
+    "spark": "3.5.3"
+  },
+  "bronze_rows": 70,
+  "silver_rows": 70,
+  "quality": {
+    "total_rows": 70,
+    "unique_ids": 70,
+    "missing_price": 0,
+    "invalid_area": 0,
+    "nonpositive_price": 0,
+    "missing_rooms": 0,
+    "missing_neighborhood": 0,
+    "ratio_mismatches": 0
+  },
+  "curated_rows": 67,
+  "quarantined_rows": 3,
+  "quarantine_rule": "Only /ro/oferta/ individual listings; exclude /ro/ansamblu/ development advertisements",
+  "upstream_unfiltered_market_summary": {
+    "Total_Anunturi": 70,
+    "Pret_Mediu_EUR": 155567.0,
+    "Pret_Mediu_MP_EUR": 2051.0,
+    "Pret_Min_EUR": 1650,
+    "Pret_Max_EUR": 850000
+  },
+  "market_summary": [
+    {
+      "Total_Anunturi": 67,
+      "Pret_Mediu_EUR": 157515.0,
+      "Pret_Mediu_MP_EUR": 2078.0,
+      "Pret_Min_EUR": 66500,
+      "Pret_Max_EUR": 850000
+    }
+  ],
+  "neighborhood_groups": 6,
+  "room_groups": 5,
+  "independent_sql_reconciliation": "passed",
+  "storage_adapter": "Original PySpark transform/aggregation functions; pandas/pyarrow writes local CSV/Parquet",
+  "not_executed": [
+    "Fabric",
+    "OneLake",
+    "Azure",
+    "Databricks",
+    "Airflow",
+    "Docker",
+    "Power BI"
+  ]
+}

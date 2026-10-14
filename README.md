@@ -1,3 +1,17 @@
+## Verified Windows execution and data-quality checks
+
+This fork adds local execution support and a verified snapshot to the original project by [Bahna-Darius](https://github.com/Bahna-Darius/real-estate-data-pipeline).
+
+- 70 advertisements processed; three development advertisements quarantined; 67 individual offers analyzed.
+- Original PySpark transformations and aggregation functions used, with independent SQL reconciliation.
+- Eight original Silver assertions passed with an equivalent Windows SQL fixture adapter; original Streamlit dashboard and filters validated.
+- See [run instructions, provenance and limitations](reproduction/README.md), [recorded results](reproduction/results/run_report.json), and [validation summary](reproduction/results/validation_summary.json).
+- Microsoft Fabric was not deployed in this local run.
+
+![Verified local dashboard](reproduction/dashboard.png)
+
+The original project documentation follows below; its larger dataset and cloud descriptions refer to the upstream author's work.
+
 # 🏠 Romanian Real Estate Data Pipeline
 
 <p align="center">
